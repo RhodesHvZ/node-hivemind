@@ -15,10 +15,12 @@ var stream = require('stream')
  */
 
 var log_levels = {
+  10: 'TRACE',
   20: 'DEBUG',
   30: 'INFO',
   40: 'WARN',
-  50: 'ERROR'
+  50: 'ERROR',
+  60: 'FATAL'
 }
 
 /**

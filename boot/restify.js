@@ -1,5 +1,4 @@
 
-var router = require('express').Router()
 var restify = require('express-restify-mongoose')
 var User = require('../models/user')
 var Org = require('../models/org')
@@ -14,39 +13,48 @@ var UserChat = require('../models/userchat')
 var Ticket = require('../models/ticket')
 
 module.exports = function (server) {
-  restify.serve(router, User, {
-    // middleware: server.anvil.verify({ scope: 'scope' })
+  restify.defaults({
+    onError: function (err, req, res, next) {
+      req.log.error(err)
+      res.status(500).json({
+        error: err.error || err.message || err.name,
+        error_description: err.error_description || err.description || err.message,
+        error_uri: err.error_uri
+      })
+    }
   })
 
-  restify.serve(router, Org, {
+  restify.serve(server, User, {
+    preMiddleware: server.anvil.verifier()
   })
 
-  restify.serve(router, File, {
+  restify.serve(server, Org, {
   })
 
-  restify.serve(router, Game, {
+  restify.serve(server, File, {
   })
 
-  restify.serve(router, Player, {
+  restify.serve(server, Game, {
   })
 
-  restify.serve(router, Squad, {
+  restify.serve(server, Player, {
   })
 
-  restify.serve(router, Event, {
+  restify.serve(server, Squad, {
   })
 
-  restify.serve(router, SquadEvent, {
+  restify.serve(server, Event, {
   })
 
-  restify.serve(router, PlayerChat, {
+  restify.serve(server, SquadEvent, {
   })
 
-  restify.serve(router, UserChat, {
+  restify.serve(server, PlayerChat, {
   })
 
-  restify.serve(router, Ticket, {
+  restify.serve(server, UserChat, {
   })
 
-  server.use(router)
+  restify.serve(server, Ticket, {
+  })
 }

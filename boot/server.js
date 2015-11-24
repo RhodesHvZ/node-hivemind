@@ -84,16 +84,16 @@ module.exports = function (server) {
   }
 
   /**
-   * Restify
-   */
-
-  restify(server)
-
-  /**
    * Logger
    */
 
   server.use(logger)
+
+  /**
+   * Restify
+   */
+
+  restify(server)
 
   /**
    * Static Files

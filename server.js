@@ -10,6 +10,7 @@ require('./boot/server')(app)
 require('./routes/index')(app)
 require('./routes/settings')(app)
 require('./routes/sessions')(app)
+require('./routes/anvil_callback')(app)
 
 /**
  * Start the server
